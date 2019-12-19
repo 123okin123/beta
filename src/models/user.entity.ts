@@ -1,5 +1,9 @@
 import { Tag } from './tag.entity';
+import { Entity } from 'typeorm';
+import { ApiResponseProperty } from '@nestjs/swagger';
+@Entity()
 export class User {
+  @ApiResponseProperty()
   public readonly uuid: string;
   public email: string;
   public salutation: string | null;

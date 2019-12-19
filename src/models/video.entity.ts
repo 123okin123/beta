@@ -1,4 +1,4 @@
-export interface Video {
+export class Video {
     url: string;
     uuid: string;
     pending: boolean;

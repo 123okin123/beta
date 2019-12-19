@@ -6,4 +6,8 @@ export class AssetService {
   get(uuid: string): Asset {
     return new Asset();
   }
+
+  create(asset: Asset) {
+    return new Asset();
+  }
 }
