@@ -3,11 +3,12 @@ import { Asset } from 'src/models/asset.entity';
 
 @Injectable()
 export class AssetService {
-  get(uuid: string): Asset {
+  
+  public get(uuid: string): Asset {
     return new Asset();
   }
 
-  create(asset: Asset) {
+  public async create(asset: Asset) {
     return new Asset();
   }
 }

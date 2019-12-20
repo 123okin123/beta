@@ -2,7 +2,7 @@ import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common'
 import { Asset } from 'src/models/asset.entity';
 import { AssetService } from 'src/services/asset.service';
 import { Livestream } from 'src/models/livestream.entity';
-import { ApiTags, ApiResponseProperty, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiResponseProperty, ApiOperation, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { LivestreamSlot } from 'src/models/livestream-slot.entity';
 
 @ApiTags('Livestreams')
@@ -10,29 +10,41 @@ import { LivestreamSlot } from 'src/models/livestream-slot.entity';
 export class LivestreamController {
   constructor(private readonly assetService: AssetService) {}
 
+  @ApiOperation({summary: 'Get one Livestream'})
   @Get(':uuid')
   get(@Param() params): Livestream {
     return;
   }
 
+  @ApiOperation({summary: 'Creates a new Livestream'})
   @Post()
   create(@Body() livestream: Livestream) {
     return;
   }
 
+  @ApiOperation({summary: 'Updates a Livestream'})
   @Put(':uuid')
   update(@Param('uuid') uuid: string, @Body() livestream: Livestream) {
     return;
   }
 
+  @ApiOperation({summary: 'Deletes a Livestream'})
   @Delete(':uuid')
   remove(@Param('uuid') uuid: string) {
     return;
   }
 
-  @ApiOperation({summary: 'Creates a new Slot for the Livestream'})
+  @ApiOperation({summary: 'Creates a new Slot of the Livestream for the specified asset'})
+  @ApiExtraModels(Asset)
   @Post(':uuid/slots')
-  addSlot(@Param('uuid') uuid: string, @Body() slot: LivestreamSlot) {
+  addSlot(@Param('uuid') uuid: string, @Body() slot: LivestreamSlot): LivestreamSlot {
+    return;
+  }
+
+  @ApiOperation({summary: 'Get all Slots of a Livestream'})
+  @ApiExtraModels(Asset)
+  @Get(':uuid/slots')
+  getSlots(@Param('uuid') uuid: string): LivestreamSlot {
     return;
   }
 

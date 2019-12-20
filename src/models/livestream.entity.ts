@@ -7,9 +7,15 @@ export class Livestream {
   @ApiResponseProperty()
   public readonly uuid: string;
 
-  public url: string;
+  public readonly output_url: string;
 
-  @OneToMany(type => LivestreamSlot, slot => slot.livestream)
+  public readonly input_url: string;
+
+  @ApiResponseProperty({ type: () => [LivestreamSlot] })
+  @OneToMany(
+    type => LivestreamSlot,
+    slot => slot.livestream,
+  )
   @JoinColumn()
   public slots: LivestreamSlot[];
 }
