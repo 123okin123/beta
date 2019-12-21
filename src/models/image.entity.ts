@@ -1,5 +1,14 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
 export class Image {
-    url: string;
-    uuid: string;
-    pending: boolean;
-  }
+
+  @PrimaryGeneratedColumn()
+  public uuid: string;
+
+  @Column()
+  public url: string;
+
+  @Column()
+  public pending: boolean;
+}

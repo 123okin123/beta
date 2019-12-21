@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { Asset } from 'src/models/asset.entity';
-import { AssetService } from 'src/services/asset.service';
+import { AssetService } from 'src/asset/services/asset.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.request';
 
@@ -17,15 +17,21 @@ import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.reques
 export class AssetController {
   constructor(private readonly assetService: AssetService) {}
 
+  @ApiOperation({ summary: 'Get all Assets' })
+  @Get()
+  public async getAkk(@Param() params): Promise<Asset[]> {
+    return this.assetService.getAll();
+  }
+
   @ApiOperation({ summary: 'Get one Asset' })
   @Get(':uuid')
-  public get(@Param() params): Asset {
+  public async get(@Param() params): Promise<Asset> {
     return this.assetService.get(params.uuid);
   }
 
   @ApiOperation({ summary: 'Create an Asset' })
   @Post()
-  public create(@Body() asset: Asset): Promise<Asset> {
+  public async create(@Body() asset: Asset): Promise<Asset> {
     return this.assetService.create(asset);
   }
 

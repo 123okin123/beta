@@ -13,7 +13,7 @@ import {
 import { LivestreamSlot } from './livestream-slot.entity';
 import { ApiResponseProperty } from '@nestjs/swagger';
 
-@Entity()
+@Entity('Asset')
 export class Asset {
   @PrimaryGeneratedColumn()
   @ApiResponseProperty()
@@ -24,20 +24,20 @@ export class Asset {
   public title: string;
 
   @IsString()
-  @Column()
-  public short_description: string;
+  @Column({ nullable: true })
+  public short_description: string | null;
 
   @IsString()
-  @Column()
-  public description: string;
+  @Column({ nullable: true })
+  public description: string | null;
 
-  @Column()
+  @Column({ default: '' })
   public public_from: string | null;
 
   @Column()
   public content_start_date: string | null;
 
-  @Column()
+  @Column('simple-array')
   @ApiResponseProperty()
   public readonly geo: string[];
 

@@ -1,6 +1,5 @@
 import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common';
 import { Asset } from 'src/models/asset.entity';
-import { AssetService } from 'src/services/asset.service';
 import { Livestream } from 'src/models/livestream.entity';
 import { ApiTags, ApiResponseProperty, ApiOperation, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { LivestreamSlot } from 'src/models/livestream-slot.entity';
@@ -8,7 +7,6 @@ import { LivestreamSlot } from 'src/models/livestream-slot.entity';
 @ApiTags('Livestreams')
 @Controller('livestreams')
 export class LivestreamController {
-  constructor(private readonly assetService: AssetService) {}
 
   @ApiOperation({summary: 'Get one Livestream'})
   @Get(':uuid')
@@ -55,6 +53,7 @@ export class LivestreamController {
   }
 
 
+  constructor() {}
 
 
 
