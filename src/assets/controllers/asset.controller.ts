@@ -6,49 +6,57 @@ import {
   Body,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
-import { Asset } from 'src/models/asset.entity';
-import { AssetService } from 'src/asset/services/asset.service';
+import { Asset } from 'src/common/models/asset.entity';
+import { AssetService } from 'src/assets/services/asset.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.request';
+import { AddUUIDObjectRequest } from 'src/common/models/requests/add-uuid-object.request';
+import { Crud } from '@nestjsx/crud';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Assets')
+@UseGuards(AuthGuard())
+@Crud({
+  model: {
+    type: Asset,
+  },
+})
 @Controller('assets')
 export class AssetController {
-  constructor(private readonly assetService: AssetService) {}
 
-  @ApiOperation({ summary: 'Get all Assets' })
-  @Get()
-  public async getAkk(@Param() params): Promise<Asset[]> {
-    return this.assetService.getAll();
-  }
+  // @ApiOperation({ summary: 'Get all Assets' })
+  // @Get()
+  // public async getAkk(@Param() params): Promise<Asset[]> {
+  //   return this.assetService.getAll();
+  // }
 
-  @ApiOperation({ summary: 'Get one Asset' })
-  @Get(':uuid')
-  public async get(@Param() params): Promise<Asset> {
-    return this.assetService.get(params.uuid);
-  }
+  // @ApiOperation({ summary: 'Get one Asset' })
+  // @Get(':uuid')
+  // public async get(@Param() params): Promise<Asset> {
+  //   return this.assetService.get(params.uuid);
+  // }
 
-  @ApiOperation({ summary: 'Create an Asset' })
-  @Post()
-  public async create(@Body() asset: Asset): Promise<Asset> {
-    return this.assetService.create(asset);
-  }
+  // @ApiOperation({ summary: 'Create an Asset' })
+  // @Post()
+  // public async create(@Body() asset: Asset): Promise<Asset> {
+  //   return this.assetService.create(asset);
+  // }
 
-  @ApiOperation({ summary: 'Update an Asset' })
-  @Put(':uuid')
-  public update(
-    @Param('uuid') uuid: string,
-    @Body() asset: Asset,
-  ): Promise<Asset> {
-    return;
-  }
+  // @ApiOperation({ summary: 'Update an Asset' })
+  // @Put(':uuid')
+  // public update(
+  //   @Param('uuid') uuid: string,
+  //   @Body() asset: Asset,
+  // ): Promise<Asset> {
+  //   return;
+  // }
 
-  @ApiOperation({ summary: 'Delete an Asset' })
-  @Delete(':uuid')
-  public remove(@Param('uuid') uuid: string) {
-    return;
-  }
+  // @ApiOperation({ summary: 'Delete an Asset' })
+  // @Delete(':uuid')
+  // public remove(@Param('uuid') uuid: string) {
+  //   return;
+  // }
 
   @ApiOperation({ summary: 'Adds a Tag to the Asset' })
   @Post(':uuid/tags')
@@ -94,4 +102,7 @@ export class AssetController {
   ) {
     return;
   }
+
+  constructor(private readonly assetService: AssetService) {}
+
 }

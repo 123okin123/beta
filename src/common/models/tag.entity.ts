@@ -9,17 +9,17 @@ export class Tag {
   public readonly uuid: string;
 
   @ApiProperty()
-  @Column()
+  @Column('text')
   @IsString()
   public value: string; // e.g. football
 
   @ApiProperty()
-  @Column()
+  @Column('text')
   @IsString()
   public category: string; // e.g. sporttype
-  
+
   @ApiProperty()
-  @Column()
+  @Column('boolean', { default: false })
   @IsBoolean()
-  public hidden: boolean;
+  public hidden: boolean = false;
 }

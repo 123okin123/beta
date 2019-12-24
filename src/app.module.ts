@@ -1,26 +1,20 @@
-import { Livestream } from 'src/models/livestream.entity';
-import { UploadController } from './controllers/upoad.controller';
-import { LivestreamController } from './controllers/livestream.controller';
-import { AssetController } from './controllers/asset.controller';
 import { Module } from '@nestjs/common';
-import { AssetService } from './asset/services/asset.service';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Tag } from './models/tag.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdminUserEntity, DefaultAdminModule, DefaultAdminSite } from 'nestjs-admin';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
-import { Asset } from './models/asset.entity';
-import { Image } from './models/image.entity';
-import { Video } from './models/video.entity';
-import { LivestreamSlot } from './models/livestream-slot.entity';
-import { AssetModule } from './asset/asset.module';
-import { DefaultAdminModule } from 'nestjs-admin';
-import { AdminUserEntity } from 'nestjs-admin';
+import { AssetModule } from './assets/assets.module';
+import { User } from './users/user.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     DefaultAdminModule,
     AssetModule,
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (
@@ -34,12 +28,7 @@ import { AdminUserEntity } from 'nestjs-admin';
         database: configService.get<string>('TYPEORM_DATABASE'),
         entities: [
           AdminUserEntity,
-          Asset,
-          Tag,
-          Image,
-          Video,
-          LivestreamSlot,
-          Livestream,
+          __dirname + '/**/*.entity{.ts,.js}',
         ],
         migrations: [__dirname + 'migrations/*.migration{.ts,.js}'],
         synchronize: true,
@@ -50,4 +39,6 @@ import { AdminUserEntity } from 'nestjs-admin';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+
+}
