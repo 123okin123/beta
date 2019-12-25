@@ -8,10 +8,10 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { Asset } from 'src/common/models/asset.entity';
+import { Asset } from 'src/models/asset.entity';
 import { AssetService } from 'src/assets/services/asset.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { AddUUIDObjectRequest } from 'src/common/models/requests/add-uuid-object.request';
+import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.request';
 import { Crud } from '@nestjsx/crud';
 import { AuthGuard } from '@nestjs/passport';
 

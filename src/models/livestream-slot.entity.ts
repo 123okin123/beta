@@ -1,4 +1,4 @@
-import { Livestream } from 'src/common/models/livestream.entity';
+import { Livestream } from 'src/models/livestream.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, IsNull, JoinColumn, OneToOne } from 'typeorm';
 import { ApiResponseProperty, ApiPropertyOptional, ApiHideProperty, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { IsString, ValidateNested } from 'class-validator';

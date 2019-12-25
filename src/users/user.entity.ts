@@ -1,6 +1,6 @@
 import { SubscriptionTransportType } from './subscription-transport-type.enum';
-import { Subscription } from '../common/models/subscription.entity';
-import { Tag } from '../common/models/tag.entity';
+import { Subscription } from '../models/subscription.entity';
+import { Tag } from '../models/tag.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,

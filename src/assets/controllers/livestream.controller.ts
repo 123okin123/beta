@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Post, Body, Put, Delete, UseGuards } from '@nestjs/common';
-import { Asset } from 'src/common/models/asset.entity';
-import { Livestream } from 'src/common/models/livestream.entity';
+import { Asset } from 'src/models/asset.entity';
+import { Livestream } from 'src/models/livestream.entity';
 import { ApiTags, ApiResponseProperty, ApiOperation, ApiBody, ApiExtraModels } from '@nestjs/swagger';
-import { LivestreamSlot } from 'src/common/models/livestream-slot.entity';
+import { LivestreamSlot } from 'src/models/livestream-slot.entity';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Livestreams')

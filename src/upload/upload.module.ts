@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DefaultAdminModule, DefaultAdminSite } from 'nestjs-admin';
-import { Asset } from 'src/common/models/asset.entity';
+import { DefaultAdminSite } from 'nestjs-admin';
+import { Asset } from 'src/models/asset.entity';
 import { UploadController } from './controllers/upoad.controller';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
     ]),
-    DefaultAdminModule,
   ],
   controllers: [UploadController],
   providers: [],

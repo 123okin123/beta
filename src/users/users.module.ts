@@ -1,18 +1,17 @@
-import { AuthGuard } from '@nestjs/passport';
-import { Module, UseGuards } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { DefaultAdminSite, DefaultAdminModule } from 'nestjs-admin';
-import { User } from './user.entity';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/auth/auth.module';
+import { User } from './user.entity';
+import { UsersService } from './users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), DefaultAdminModule],
+  imports: [
+    forwardRef(() => AuthModule),
+    TypeOrmModule.forFeature([User]),
+  ],
   providers: [UsersService],
-  exports: [UsersService, DefaultAdminModule, TypeOrmModule],
+  exports: [UsersService, TypeOrmModule],
 })
 
 export class UsersModule {
-  constructor(private readonly adminSite: DefaultAdminSite) {
-    this.adminSite.register('User', User);
-  }
 }
