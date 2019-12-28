@@ -1,6 +1,7 @@
+import { UserRole } from './../users/user-role.enum';
+import { User } from './../users/user.entity';
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
-import { User } from 'src/users/user.entity';
-import { UserRole } from 'src/users/user-role.enum';
+
 
 export class CreateUser1577291458011 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {

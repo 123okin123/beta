@@ -23,12 +23,15 @@ import { UsersModule } from './users/users.module';
         entities: [
           __dirname + '/**/*.entity{.ts,.js}',
         ],
-        migrations: [__dirname + 'migrations/*.migration{.ts,.js}'],
+        migrations: [ __dirname + '/migrations/**/*.{.ts,.js}'],
         cli: {
-          migrationsDir: __dirname + 'migrations/*.migration{.ts,.js}',
-          entitiesDir: __dirname + 'models/*.entity{.ts,.js}',
+          migrationsDir: 'src/migrations',
+          entitiesDir:  'src/models',
         },
-        synchronize: true,
+        synchronize: false,
+        logging: true,
+        migrationsRun: false,
+
       }),
       inject: [ConfigService],
     }),
