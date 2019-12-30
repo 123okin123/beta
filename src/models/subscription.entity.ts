@@ -7,6 +7,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { User } from '../users/user.entity';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Subscription {
@@ -17,6 +18,7 @@ export class Subscription {
     type => User,
     user => user.subscriptions,
   )
+  @ApiHideProperty()
   public user: User;
 
   @OneToOne(type => Tag)

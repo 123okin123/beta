@@ -7,12 +7,13 @@ import {
   Put,
   Delete,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { Asset } from 'src/models/asset.entity';
 import { AssetService } from 'src/assets/services/asset.service';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.request';
-import { Crud } from '@nestjsx/crud';
+import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
+import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.dto';
+import { Crud, CrudRequest } from '@nestjsx/crud';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Assets')
@@ -21,46 +22,65 @@ import { AuthGuard } from '@nestjs/passport';
   model: {
     type: Asset,
   },
+  routes: {
+    createOneBase: {
+      decorators: [
+        ApiBody({
+          schema: {
+            type: 'object',
+            properties: {
+              title: { type: 'string' },
+              short_description: { type: 'string' },
+              description: { type: 'string' },
+              public_from: { type: 'string' },
+              content_start_date: { type: 'string' },
+            },
+          },
+        }),
+      ],
+    },
+    updateOneBase: {
+      decorators: [
+        ApiBody({
+          schema: {
+            type: 'object',
+            properties: {
+              title: { type: 'string' },
+              short_description: { type: 'string' },
+              description: { type: 'string' },
+              public_from: { type: 'string' },
+              content_start_date: { type: 'string' },
+            },
+          },
+        }),
+      ],
+    },
+    replaceOneBase: {
+      decorators: [ApiBody({
+        schema: {
+          type: 'object',
+          properties: {
+            title: {type: 'string'},
+            short_description: {type: 'string'},
+            description: {type: 'string'},
+            public_from: {type: 'string'},
+            content_start_date: {type: 'string'}
+          }
+        }
+      })],
+    }
+  },
 })
 @Controller('assets')
 export class AssetController {
 
-  // @ApiOperation({ summary: 'Get all Assets' })
-  // @Get()
-  // public async getAkk(@Param() params): Promise<Asset[]> {
-  //   return this.assetService.getAll();
-  // }
-
-  // @ApiOperation({ summary: 'Get one Asset' })
-  // @Get(':uuid')
-  // public async get(@Param() params): Promise<Asset> {
-  //   return this.assetService.get(params.uuid);
-  // }
-
-  // @ApiOperation({ summary: 'Create an Asset' })
-  // @Post()
-  // public async create(@Body() asset: Asset): Promise<Asset> {
-  //   return this.assetService.create(asset);
-  // }
-
-  // @ApiOperation({ summary: 'Update an Asset' })
-  // @Put(':uuid')
-  // public update(
-  //   @Param('uuid') uuid: string,
-  //   @Body() asset: Asset,
-  // ): Promise<Asset> {
-  //   return;
-  // }
-
-  // @ApiOperation({ summary: 'Delete an Asset' })
-  // @Delete(':uuid')
-  // public remove(@Param('uuid') uuid: string) {
-  //   return;
-  // }
 
   @ApiOperation({ summary: 'Adds a Tag to the Asset' })
   @Post(':uuid/tags')
-  public addTag(@Body() body: AddUUIDObjectRequest) {
+  public addTag(
+    @Param('uuid') assetUUID: string,
+    @Body() body: AddUUIDObjectRequest,
+  ) {
     return;
   }
 
@@ -75,7 +95,10 @@ export class AssetController {
 
   @ApiOperation({ summary: 'Adds an Image to the Asset' })
   @Post(':uuid/images')
-  public addImage(@Body() body: AddUUIDObjectRequest) {
+  public addImage(
+    @Param('uuid') assetUUID: string,
+    @Body() body: AddUUIDObjectRequest,
+  ) {
     return;
   }
 
@@ -90,7 +113,10 @@ export class AssetController {
 
   @ApiOperation({ summary: 'Adds a Video to the Asset' })
   @Post(':uuid/videos')
-  public addVideo(@Body() body: AddUUIDObjectRequest) {
+  public addVideo(
+    @Param('uuid') assetUUID: string,
+    @Body() body: AddUUIDObjectRequest,
+  ) {
     return;
   }
 
@@ -104,5 +130,4 @@ export class AssetController {
   }
 
   constructor(private readonly assetService: AssetService) {}
-
 }

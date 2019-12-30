@@ -7,7 +7,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreateUploadEndpointResponse } from 'src/models/responses/create-upload-endpoint.response';
+import { CreateUploadEndpointResponse } from 'src/models/responses/create-upload-endpoint.dto';
 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Video } from 'src/models/video.entity';

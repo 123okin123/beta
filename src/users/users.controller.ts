@@ -1,8 +1,9 @@
-import { Controller, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Controller, UseGuards, Post, Body, Delete, Param } from '@nestjs/common';
+import { ApiTags, ApiParam } from '@nestjs/swagger';
 import { Crud } from '@nestjsx/crud';
 import { User } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { AddUUIDObjectRequest } from 'src/models/requests/add-uuid-object.dto';
 
 @ApiTags('Users')
 @UseGuards(AuthGuard())

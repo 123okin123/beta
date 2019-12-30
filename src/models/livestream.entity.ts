@@ -1,3 +1,4 @@
+import { IsArray } from 'class-validator';
 import { Entity, OneToMany, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiResponseProperty } from '@nestjs/swagger';
 import { LivestreamSlot } from './livestream-slot.entity';

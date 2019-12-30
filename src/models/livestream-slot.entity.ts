@@ -13,23 +13,17 @@ export class LivestreamSlot {
 
   @Column()
   @IsString()
-  @ApiProperty()
   public from: string;
 
   @Column()
   @IsString()
-  @ApiProperty()
   public until: string;
 
-  @Column()
-  @IsString()
-  @ApiProperty()
-  public asset_uuid: string;
-
+  @ApiResponseProperty({type: () => Asset})
   @OneToOne(type => Asset, asset => asset.slot)
   public readonly asset: Asset;
 
-
+  @ApiResponseProperty({type: () => Livestream})
   @ManyToOne(type => Livestream, livestream => livestream.slots)
   public readonly livestream: Livestream;
 }

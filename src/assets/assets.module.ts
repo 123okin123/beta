@@ -9,6 +9,7 @@ import { Livestream } from 'src/models/livestream.entity';
 import { Tag } from 'src/models/tag.entity';
 import { Video } from 'src/models/video.entity';
 import { AssetService } from './services/asset.service';
+import { LivestreamController } from './controllers/livestream.controller';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AssetService } from './services/asset.service';
       Livestream,
     ]),
   ],
-  controllers: [AssetController],
+  controllers: [AssetController, LivestreamController],
   providers: [AssetService],
   exports: [TypeOrmModule],
 })

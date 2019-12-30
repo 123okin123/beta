@@ -13,7 +13,7 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { LivestreamSlot } from './livestream-slot.entity';
-import { ApiResponseProperty } from '@nestjs/swagger';
+import { ApiResponseProperty, ApiProperty } from '@nestjs/swagger';
 import { Moment } from 'moment';
 import { Type, Transform } from 'class-transformer';
 import * as  moment from 'moment';
@@ -25,15 +25,17 @@ export class Asset {
   public readonly uuid: string;
 
   @CreateDateColumn()
+  @ApiResponseProperty()
   @Type(() => Date)
   @Transform(value => moment(value), { toClassOnly: true })
-  createdAt: Date;
+  public readonly createdAt: Date;
 
 
   @UpdateDateColumn()
+  @ApiResponseProperty()
   @Type(() => Date)
   @Transform(value => moment(value), { toClassOnly: true })
-  updatedAt: Date;
+  public readonly updatedAt: Date;
 
   @IsString()
   @Column()
@@ -49,11 +51,13 @@ export class Asset {
 
   @Column('timestamp with time zone', { nullable: true })
   @Type(() => Date)
+  @ApiProperty({type: 'string', example: '2020-12-31 23:15'})
   @Transform(value => moment(value), { toClassOnly: true })
   public public_from: Moment | null;
 
   @Column('timestamp with time zone', { nullable: true })
   @Type(() => Date)
+  @ApiProperty({type: 'string', example: '2020-12-31 23:30'})
   @Transform(value => moment(value), { toClassOnly: true })
   public content_start_date: Moment | null;
 
@@ -88,11 +92,11 @@ export class Asset {
   @ApiResponseProperty({ type: [Video] })
   public videos: Video[];
 
+  @ApiResponseProperty({ type: () => LivestreamSlot })
   @OneToOne(
     type => LivestreamSlot,
     slot => slot.asset,
   )
   @JoinColumn()
-  @ApiResponseProperty({ type: () => LivestreamSlot })
   public slot: LivestreamSlot | null;
 }
